@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "XHTML1-s.dtd" ><html
+xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+      <link rel="Stylesheet" type="text/css" href="/static/css/css.css" />
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <title>{% block title %}{% if page_title %}{{ page_title }} - {% endif %} ⵼
+          {{ site_name }}{% endblock %}</title>
+     <meta name="keywords" content="{{ meta_keywords }}" />
+     <meta name="description" content="{{ meta_description }}" />
+</head>
+<body>
+<header>
+     {% include 'tags/top-line.html' %}
+     {% include 'tags/brand_new.html' %}
+     {% include 'tags/test.html' %}
+</header>
+     <div class="main-container">
+          {% block wrapper %}{% endblock %}
+     </div>
+<footer>
+     <br/>
+     <div class="footer-container">
+        <div>
+             <a href="#"><img src="{% static 'img/vk_icon.png' %}" width="30px"/></a>
+             <a href="#"><img src="{% static 'img/instagram_icon.png' %}" width="30px"/></a>
+             <a href="#"><img src="{% static 'img/ok_icon.png' %}" width="30px"/></a>
+             <a href="#"><img src="{% static 'img/facebook_icon.png' %}" width="30px"/></a>
+        </div>
+     <div class="nav-footer">
+          <ul>
+               <li><h3>Покупателю</h3></li>
+               <li><a href="{% url 'index_url' %}">Главная</a></li>
+               <li><a href="{% url 'about_url' %}">О нас</a></li>
+               <li><a href="{% url 'pay_url' %}">Оплата</a></li>
+               <li><a href="{% url 'delivery_url' %}">Доставка</a></li>
+               <li><a href="{% url 'contact_url' %}">Контакты</a></li>
+          </ul>
+     </div>
+     <div class="nav-footer">
+          <ul>
+               <li><h3>Каталог</h3></li>
+               {% for category in categories %}
+               <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a></li>
+               {% endfor %}
+          </ul>
+</div>
+     <div class="nav-footer">
+          <ul>
+               <li><h3>Крошка-Астра</h3></li>
+               <li><p>т.+79623158564</p></li>
+               <li><p>г. Иркутск, ул. Клары Цеткин, д. 9Б</p></li>
+               <li><p>sash20052@gmail.com</p></li>
+               <li><p>WhatsApp +79623158564</p></li>
+               <li><p>Viber +79623158564</p></li>
+               <li><p>Telegram +79623158564</p></li>
+          </ul>
+     </div>
+     </div>
+</footer>
+</body></html>

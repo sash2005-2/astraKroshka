@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block wrapper %}
+<div class="breadcrumbs">
+<a href="{% url 'index_url' %}">Главная</a><span> /</span>
+<a href="{{ category.get_absolute_url }}">{{category.name}}</a>
+</div>
+<div class="page-header">
+    <h1>{{category.name}}</h1>
+</div>
+{% for prod_cat in products_of_category %}
+<div class="card-item">
+    <a href="{{ prod_cat.get_absolute_url }}"><img src="{{ prod_cat.image.url }}"  /></a>
+<a class="card-link" href="{{ prod.get_absolute_url }}"><h5>{{ prod_cat.title }}</h5></a>
+    <p class="card-link-p">{{ prod_cat.price }} руб.</p>
+    <div class="my-btn">
+    <a href="{{ prod_cat.get_absolute_url }}" class="add_to_cart button25" data-slug="{{prod_cat.slug}}">Посмотреть</a>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

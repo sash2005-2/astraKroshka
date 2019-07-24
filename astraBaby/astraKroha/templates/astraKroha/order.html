@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{{ form.name|crispy }}
+{% block wrapper %}
+<div class="form-container">
+    <form action='{% url "make_order_url" %}' method="POST"> {% csrf_token %}
+        <div>{{ form.name|as_crispy_field }}</div>
+        <div>{{ form.last_name|as_crispy_field }}</div>
+        <div>{{ form.phone|as_crispy_field }}</div>
+        <div>{{ form.buying_type|as_crispy_field }}</div>
+        <div>{{ form.date|as_crispy_field }}</div>
+        <div>{{ form.address|as_crispy_field }}</div>
+        <div>{{ form.comments|as_crispy_field }}</div>
+        <input type="submit" class="order-button" value="Заказать"/>
+    </form>
+</div>
+<script src="{% static '/admin/js/vendor/jquery/jquery.js' %}"></script>
+<script>
+        $(document).ready(function(){
+            $('#div_id_address').css('display','none')
+            $('#id_buying_type').on('click', function(){
+                buying_type = $(this).val()
+                if(buying_type == 'delivery'){
+                    $('#div_id_address').css('display','block')
+                }else{
+                    $('#div_id_address').css('display','none')
+                }
+            })
+        })
+</script>
+{% endblock %}

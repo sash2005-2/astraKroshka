@@ -1,0 +1,5 @@
+<div class="flex-menu">
+    {% for category in categories %}
+    <div class="flex-menu-inner"><a href="{{ category.get_absolute_url }}">{{category.name}}</a></div>
+    {% endfor %}
+</div>

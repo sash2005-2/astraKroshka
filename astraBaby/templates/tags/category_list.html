@@ -1,0 +1,4 @@
+<h3>Categories</h3>
+{% for cat in obj %}
+     <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a><br />
+{% endfor %}

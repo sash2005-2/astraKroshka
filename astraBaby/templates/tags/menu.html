@@ -1,0 +1,13 @@
+<div class="main-menu">
+    <center>
+        <div id="navigation">
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </center>
+</div>
+
+

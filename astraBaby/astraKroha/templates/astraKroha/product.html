@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block wrapper %}
+
+<div class="breadcrumbs">
+<a href="{% url 'index_url' %}">Главная</a><span> /</span>
+<a href="{{ product.category.get_absolute_url }}">{{product.category}}</a><span> /</span>
+<a href="{{ product.get_absolute_url }}">{{product.title}}</a>
+</div>
+<div class="product-card">
+    <div>
+        <img src="{{ product.image.url }}"/>
+    </div>
+    <div>
+        <ul>
+            <li><h2>{{product.title}}</h2></li>
+            <li><hr/></li>
+            <li><br/><p>{{product.description}}</p></li>
+            <li><hr/></li>
+            <li><br/><h1>{{product.price}} руб.</h1></li>
+        </ul>
+    </div>
+</div>
+<br/>
+<hr/>
+<div class="my-btn">
+    <a href="#" class="add_to_cart button25 " data-slug="{{product.slug}}">В корзину</a>
+    </div>
+<script src="{% static '/admin/js/vendor/jquery/jquery.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $('.add_to_cart').on('click', function(e){
+            e.preventDefault()
+            product_slug = $(this).attr('data-slug')
+            data ={
+                product_slug: product_slug
+            }
+            $.ajax({
+                type:"GET",
+                url:'{% url "add_to_cart_view_url" %}',
+                data: data,
+                success: function(data){
+                $("#cart_count").html(data.cart_total)
+
+            }
+            })
+            alert("Товар добавлен в корзину")
+        })
+    })
+</script>
+{% endblock %}

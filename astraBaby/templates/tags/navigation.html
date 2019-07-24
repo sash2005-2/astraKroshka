@@ -1,0 +1,19 @@
+{% load static %}
+<ul>
+     <li>
+         <p>
+              <img src="{% static 'img/phone.png' %}" width="30px">
+          </p>
+     </li>
+     <li>
+         <p>
+             +7(962)-315-85-64
+         </p>
+     </li>
+     <li><a href="{% url 'index_url' %}">Главная</a></li>
+     <li><a href="{% url 'about_url' %}">О нас</a></li>
+     <li><a href="{% url 'pay_url' %}">Оплата</a></li>
+     <li><a href="{% url 'delivery_url' %}">Доставка</a></li>
+     <li><a href="{% url 'contact_url' %}">Контакты</a></li>
+</ul>
+<div class="cb"></div>

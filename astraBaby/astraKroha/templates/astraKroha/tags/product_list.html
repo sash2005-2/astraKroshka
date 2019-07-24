@@ -1,0 +1,63 @@
+{% load static %}
+
+<div class="item-row info-about-company info-main-page" >
+    <div class="header-info-content">
+            <img src="{% static 'img/s1200.png' %}" width="30px"/>
+        <h1>Интернет-магазин товаров для малышей и мам "Крошка-астра"</h1>
+    </div>
+    <div class="sample-content">
+        <h3>Магазин детских товаров "Крошка-астра" - это широкий ассортимент товаров для малышей: трусики, многоразовые
+            подгузники, игрушки, а такжк товары для молодых мам.</h3>
+        <h3>С нами Вашему малышу будет комфортно расти и развиваться.</h3>
+    </div>
+    <br/>
+</div>
+
+    <div class="item-row info-about-goods info-main-page" >
+        <div class="header-info-content">
+            <img src="{% static 'img/money.png' %}" width="50px"/>
+            <h1>Здоровье малыша и экономия семейного бюджета!</h1>
+            <h3 class="sample-content">В нашем интернет-магазине «Крошка-Астра» в г. Иркутске предлагаются многослойные многоразовые трусики, подгузники в
+            широком ассортименте с доставкой по всей России. Это более выгодная альтернатива одноразовым подгузникам. Они незаменимы для всех, кто хотел бы приучить ребёнка к горшку и
+            избежать при этом неприятностей в виде луж на полу, мокрой мягкой мебели, ковров, одежды взрослых.</h3>
+        </div>
+        <br/>
+    </div>
+<div class="item-row info-about-benefit info-main-page" >
+    <div class="header-info-content">
+            <img src="{% static 'img/benefit.png' %}" width="30px"/>
+        <h1>Выбирайте "Крошка-Астра" потому, что:</h1>
+        <div class="sample-content">
+            <h3 class="sample-content-text"><img src="{% static 'img/galochka.png' %}" width="20px"/>Наш товар выполнен из экологичного и безопасного материала.</h3>
+            <h3 class="sample-content-text"><img src="{% static 'img/galochka.png' %}" width="20px"/>Мы работаем напрямую с производителем и исключаем цепочку посредников.</h3>
+            <h3 class="sample-content-text"><img src="{% static 'img/galochka.png' %}" width="20px"/>Уникальность и гибкость дает нам существенные конкурентные преимущества.</h3>
+            <h3 class="sample-content-text"><img src="{% static 'img/galochka.png' %}" width="20px"/>Внимательно подходим к каждому клиенту и разработали прогрессивную систему скидок.</h3>
+        </div>
+    </div>
+    <br/>
+</div>
+<div class="item-row info-about-features info-main-page" >
+    <div class="header-info-content">
+            <img src="{% static 'img/attention.png' %}" width="30px"/>
+        <h1>Особенности многоразовых подгузников</h1>
+        <div class="sample-content">
+            <h3 class="sample-content-text"><img src="{% static 'img/attention.png' %}" width="20px"/>Они имеют универсальный изменяемый размер и будут «расти» вместе с Вашим малышом.</h3>
+            <h3 class="sample-content-text"><img src="{% static 'img/attention.png' %}" width="20px"/>Альтернатива одноразовым подгузникам и окупятся уже через 1-2 месяца.</h3>
+            <h3 class="sample-content-text"><img src="{% static 'img/attention.png' %}" width="20px"/>Постель и вещи будут надежно зищищены от протечек, а кожа будет дышать.</h3>
+            <h3 class="sample-content-text"><img src="{% static 'img/attention.png' %}" width="20px"/>Трусики, подгузники и вкладыши к ним легко стираются.</h3>
+        </div>
+    </div>
+    <br/>
+</div>
+<div class="item-row">
+{% for category in categories %}
+
+<div class="card-item">
+    <a href="{{ category.get_absolute_url }}"><img src="{{ category.image.url }}" /></a>
+    <a class="card-link" href="{{ category.get_absolute_url }}"><h5>{{ category.name }}</h5></a>
+    <div class="my-btn">
+        <a  href="{{ category.get_absolute_url }}" class="add_to_cart button25">Посмотреть</a>
+    </div>
+</div>
+{% endfor %}
+</div>

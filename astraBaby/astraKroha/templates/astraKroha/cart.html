@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block wrapper %}
+<div class="page-header">
+    <h1>Корзина</h1>
+</div>
+{% if cart.item.count > 0 %}
+<div class="my-cart">
+<table>
+    <tr>
+        <th>Наименование</th>
+        <th>Количество</th>
+        <th>Цена</th>
+    </tr>
+    {% for item in cart.item.all %}
+    <tr class="cart-item-{{ item.product.id }}">
+        <td>{{item.product.title}}</td>
+        <td>
+            <form action="" method="GET">
+                <input type="number" name="qty" class="cart-item-qty" data-id="{{ item.id }}" value="{{ item.qty }}" min="1" style="width:50px" />
+            </form>
+        </td>
+        <td id="cart-item-total-{{ item.id }}">{{ item.item_total }} руб.</td>
+        <td><a href="#" class="remove_from_cart button25" data-slug="{{item.product.slug}}" data-id="{{ item.product.id }}">Удалить</a></td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td><strong>Итого:</strong></td>
+        <td id="cart-total-price"><strong>{{ cart.cart_total }} руб.</strong></td>
+        <td></td>
+    </tr>
+</table>
+    <br/>
+    <hr/>
+    <a class="button25" href="{% url 'checkout_view_url' %}">Посмотреть заказ</a>
+</div>
+<h3 class="cart-empty"></h3>
+{% else %}
+<div class="page-header">
+    <h3>Ваша корзина пуста</h3>
+</div>
+{% endif %}
+<script src="{% static '/admin/js/vendor/jquery/jquery.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $('.my-empty').css('display', 'none')
+        $('.remove_from_cart').on('click', function(e){
+            e.preventDefault()
+            product_slug = $(this).attr('data-slug')
+            item_product_id = $(this).attr('data-id')
+            console.log(item_product_id)
+             data ={
+                product_slug: product_slug
+            }
+            $.ajax({
+                type:"GET",
+                url:'{% url "remove_from_cart_url" %}',
+                data: data,
+                success: function(data){
+                $("#cart_count").html(data.cart_total)
+                $('.cart-item-'+item_product_id).css('display', 'none')
+                $('#cart-total-price').html('<strong>'+parseFloat(data.cart_total_price).toFixed(2) + ' руб.</strong>')
+                if(parseInt(data.cart_total)==0){
+                    $('.my-cart').css('display', 'none')
+                    $('.my-empty').css('display', 'block')
+                    $('.cart-empty').html('<h3>Ваша корзина пуста</h3>')
+                }
+            }
+            })
+        })
+    })
+    $(document).ready(function(){
+        $('.cart-item-qty').on('click', function(){
+        qty = $(this).val()
+        item_id = $(this).attr('data-id')
+        data = {
+            qty: qty,
+            item_id: item_id
+        }
+        $.ajax({
+            type: "GET",
+            url:'{% url "update_qty_url" %}',
+            data: data,
+            success: function(data){
+                 $('#cart-item-total-'+item_id).html(parseFloat(data.item_total).toFixed(2) + ' руб.')
+                 console.log(data.cart_total_price)
+                 $('#cart-total-price').html('<strong>'+parseFloat(data.cart_total_price).toFixed(2) + ' руб.</strong>')
+            }
+            })
+        })
+    })
+</script>
+{% endblock  %}

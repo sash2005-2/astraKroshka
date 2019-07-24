@@ -1,0 +1,26 @@
+{% load static %}
+    <div class="my-logo-new">
+        <div class="my-logo-new">
+        <div>
+            <a class="my-logo-link" href="{% url 'index_url' %}">
+                <h1>Крошка-Астра</h1>
+                <p>товары для малышей</p>
+            </a>
+        </div>
+        <div><a class="brand-link" href="{% url 'index_url' %}"><img src="{% static 'img/s1200.png' %}" width="60px"/></a></div>
+        </div>
+        <div>
+            <!--<form class="search">
+                <input onsubmit="" >
+                <button>поиск</button>
+            </form>-->
+            <br/>
+        </div>
+        <div class="brand-cart">
+            <a href="{% url 'cart_view_url' %}">
+                <img src="{% static 'img/cart.png' %}" width="50px">
+                Корзина:
+                <span id="cart_count">{% if not request.session.total %} 0 {% else %}{{ request.session.total }}{% endif %}</span>
+            </a>
+        </div>
+    </div>
